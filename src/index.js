@@ -20,8 +20,8 @@ const packageConfig = require("../package.json");
 
 program
   .version(packageConfig.version)
+  .parse(process.argv)
   .description("欢迎使用无星的cli进行初始化")
-  .command("init <name>")
   .action(name => {
     // 这里拿到name了，判断当前文件夹下，是否有同名文件夹
     if (!fs.existsSync(name)) {
@@ -45,6 +45,7 @@ program
       ];
       inquirer.prompt(promptList).then(answers => {
         // 判断类型，下载不同类型模板
+        console.log(answers)
         const { type, description, author } = answers;
         let url = "";
         if (type === "1") {
